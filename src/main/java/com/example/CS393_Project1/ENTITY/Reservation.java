@@ -48,7 +48,96 @@ public class Reservation {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // Getters and setters for each field
+    public Reservation() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(String reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getPickupDateTime() {
+        return pickupDateTime;
+    }
+
+    public void setPickupDateTime(Date pickupDateTime) {
+        this.pickupDateTime = pickupDateTime;
+    }
+
+    public Date getDropoffDateTime() {
+        return dropoffDateTime;
+    }
+
+    public void setDropoffDateTime(Date dropoffDateTime) {
+        this.dropoffDateTime = dropoffDateTime;
+    }
+
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public void setPickupLocation(Location pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public Location getDropoffLocation() {
+        return dropoffLocation;
+    }
+
+    public void setDropoffLocation(Location dropoffLocation) {
+        this.dropoffLocation = dropoffLocation;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     public enum ReservationStatus {
         ACTIVE,
