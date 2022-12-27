@@ -3,7 +3,7 @@ package com.example.CS393_Project1.ENTITY;
 import jakarta.persistence.*;
 @Entity
 @Table(name = "SERVICES")
-public class Service {
+public class E_Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Service {
     @Column(name = "price",nullable = false)
     private Double price;
 
-    public Service() {
+    public E_Service() {
     }
 
     public Long getId() {
