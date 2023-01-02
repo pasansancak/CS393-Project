@@ -8,7 +8,7 @@ public class Equipment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     // Other fields and methods as previously defined
     @Enumerated(EnumType.STRING)
@@ -21,11 +21,11 @@ public class Equipment {
     public Equipment() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

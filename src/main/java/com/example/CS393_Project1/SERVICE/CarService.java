@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CarService {
@@ -21,9 +22,10 @@ public class CarService {
         return CarMapper.INSTANCE.carToCarDto(car);
     }
 
-    public void saveCar(CarDTO CarDTO) {
+    public CarDTO saveCar(CarDTO CarDTO) {
         Car car = CarMapper.INSTANCE.CarDTOtoCar(CarDTO);
         carRepo.save(car);
+        return CarMapper.INSTANCE.carToCarDto(car);
     }
 
     public List<CarDTO> getAllCars() {
@@ -33,8 +35,12 @@ public class CarService {
         return carDTOs;
     }
 
-    public void deleteCar(int id) {
-        Car car = carRepo.findById(id);
-        carRepo.delete(car);
+    public boolean deleteCar(String barcode) {
+        Car car = carRepo.findByBarcodeNumber(barcode);
+        if (Objects.equals(car.getStatus().toString(), "AVAILABLE")){
+            carRepo.delete(car);
+            return true;
+        }
+        return false;
     }
 }

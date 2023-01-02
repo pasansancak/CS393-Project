@@ -2,15 +2,15 @@ package com.example.CS393_Project1.DTO;
 
 public class ServiceDTO {
 
-    private Long id;
+    private Integer id;
     private String name;
     private Double price;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
