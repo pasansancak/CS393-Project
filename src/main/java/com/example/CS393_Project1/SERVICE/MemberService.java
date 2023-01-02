@@ -1,7 +1,14 @@
 package com.example.CS393_Project1.SERVICE;
 
+import com.example.CS393_Project1.DTO.CarDTO;
+import com.example.CS393_Project1.DTO.MemberDTO;
+import com.example.CS393_Project1.ENTITY.Car;
 import com.example.CS393_Project1.ENTITY.Member;
+import com.example.CS393_Project1.MAPPER.CarMapper;
+import com.example.CS393_Project1.MAPPER.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.CS393_Project1.REPO.MemberRepo;
@@ -12,24 +19,25 @@ public class MemberService {
     @Autowired
     private MemberRepo memberRepo;
 
-    public List<Member> getAllMembers() {
-        return memberRepo.findAll();
+    public MemberDTO getMemberById(int id) {
+        Member member = memberRepo.findById(id);
+        return MemberMapper.INSTANCE.MembertoMemberDTO(member);
     }
 
-    public Member getMemberById(Long id) {
-        return memberRepo.findById(id).orElse(null);
+    public void saveMember(MemberDTO MemberDTO) {
+        Member member = MemberMapper.INSTANCE.MemberDTOtoMember(MemberDTO);
+        memberRepo.save(member);
     }
 
-    public Member saveMember(Member member) {
-        return memberRepo.save(member);
+    public List<MemberDTO> getAllMembers() {
+        List<Member> members = memberRepo.findAll();
+        List<MemberDTO> memberDTOs = new ArrayList<>();
+        for (Member member : members){ memberDTOs.add(MemberMapper.INSTANCE.MembertoMemberDTO(member));}
+        return memberDTOs;
     }
 
-    public Member updateMember(Long id, Member member) {
-        member.setId(id);
-        return memberRepo.save(member);
-    }
-
-    public void deleteMember(Long id) {
-        memberRepo.deleteById(id);
+    public void deleteMember(int id) {
+        Member member = memberRepo.findById(id);
+        memberRepo.delete(member);
     }
 }

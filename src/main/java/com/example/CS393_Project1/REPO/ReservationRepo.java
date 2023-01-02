@@ -4,5 +4,6 @@ import com.example.CS393_Project1.ENTITY.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 @Repository
-public interface ReservationRepo extends JpaRepository<Reservation, Long> {
+public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
+    Reservation findById(int id);
 }

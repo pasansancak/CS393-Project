@@ -1,9 +1,13 @@
 package com.example.CS393_Project1.SERVICE;
 
+import com.example.CS393_Project1.DTO.LocationDTO;
 import com.example.CS393_Project1.ENTITY.Location;
+import com.example.CS393_Project1.MAPPER.LocationMapper;
 import com.example.CS393_Project1.REPO.LocationRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,24 +16,25 @@ public class LocationService {
     @Autowired
     private LocationRepo locationRepo;
 
-    public List<Location> getAllLocations() {
-        return locationRepo.findAll();
+    public LocationDTO getLocationById(int id) {
+        Location location = locationRepo.findById(id);
+        return LocationMapper.INSTANCE.LocationtoLocationDTO(location);
     }
 
-    public Location getLocationById(Long id) {
-        return locationRepo.findById(id).orElse(null);
+    public void saveLocation(LocationDTO locationDTO) {
+        Location location = LocationMapper.INSTANCE.LocationDTOtoLocation(locationDTO);
+        locationRepo.save(location);
     }
 
-    public Location saveLocation(Location location) {
-        return locationRepo.save(location);
+    public List<LocationDTO> getAllLocations() {
+        List<Location> locations = locationRepo.findAll();
+        List<LocationDTO> locationDTOs = new ArrayList<>();
+        for (Location location : locations){ locationDTOs.add(LocationMapper.INSTANCE.LocationtoLocationDTO(location));}
+        return locationDTOs;
     }
 
-    public Location updateLocation(Long id, Location location) {
-        location.setId(id);
-        return locationRepo.save(location);
-    }
-
-    public void deleteLocation(Long id) {
-        locationRepo.deleteById(id);
+    public void deleteLocation(int id) {
+        Location location = locationRepo.findById(id);
+        locationRepo.delete(location);
     }
 }

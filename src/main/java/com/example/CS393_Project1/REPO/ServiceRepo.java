@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.example.CS393_Project1.ENTITY.E_Service;
 
 @Repository
-public interface ServiceRepo extends JpaRepository<E_Service, Long> {
+public interface ServiceRepo extends JpaRepository<E_Service, Integer> {
+    E_Service findById(int id);
 }
