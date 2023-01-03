@@ -43,4 +43,15 @@ public class CarService {
         }
         return false;
     }
+
+    public List<CarDTO> searchAvailableCars(Car.CarType carType, String transmissionType) {
+        List<Car> cars = carRepo.findCarsByTypeAndTransmissionType(carType, transmissionType);
+        List<CarDTO> carDTOs = new ArrayList<>();
+        for (Car car : cars) {
+            if (Objects.equals(car.getStatus().toString(), "AVAILABLE")) {
+                carDTOs.add(CarMapper.INSTANCE.carToCarDto(car));
+            }
+        }
+        return carDTOs;
+    }
 }
