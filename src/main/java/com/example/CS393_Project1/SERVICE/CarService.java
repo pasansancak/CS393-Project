@@ -2,20 +2,23 @@ package com.example.CS393_Project1.SERVICE;
 
 import com.example.CS393_Project1.DTO.CarDTO;
 import com.example.CS393_Project1.ENTITY.Car;
+import com.example.CS393_Project1.ENTITY.Reservation;
 import com.example.CS393_Project1.MAPPER.CarMapper;
 import com.example.CS393_Project1.REPO.CarRepo;
+import com.example.CS393_Project1.REPO.ReservationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class CarService {
 
     @Autowired
     private CarRepo carRepo;
+
+    @Autowired
+    private ReservationRepo reservationRepo;
 
     public CarDTO getCarById(int id) {
         Car car = carRepo.findById(id);
@@ -64,5 +67,21 @@ public class CarService {
             }
         }
         return carDTOs;
+    }
+
+
+    public boolean returnCar(int reservationNumber) {
+        Reservation r= reservationRepo.findById(reservationNumber);
+
+        if (r != null  && r.getStatus() == Reservation.ReservationStatus.ACTIVE){
+
+            r.setStatus(Reservation.ReservationStatus.COMPLETED);
+            Date date= new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+            r.setReturnDate(date);
+            r.getCar().setStatus(Car.CarStatus.AVAILABLE);
+
+            return true;
+        }
+        return false;
     }
 }

@@ -2,13 +2,13 @@ package com.example.CS393_Project1.DTO;
 
 public class LocationDTO {
 
-    private Integer id;
+    private int id;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

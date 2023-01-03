@@ -2,7 +2,7 @@ package com.example.CS393_Project1.DTO;
 
 public class ServiceDTO {
 
-    private Integer id;
+    private int id;
     private String name;
     private Double price;
 

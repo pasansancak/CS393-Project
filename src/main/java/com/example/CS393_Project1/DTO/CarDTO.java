@@ -4,7 +4,7 @@ import com.example.CS393_Project1.ENTITY.Car;
 
 public class CarDTO {
 
-    private Integer id;
+    private int id;
     private String barcodeNumber;
     private String licensePlateNumber;
     private Integer passengerCapacity;
@@ -12,11 +12,11 @@ public class CarDTO {
     private String model;
     private Integer mileage;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

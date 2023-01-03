@@ -109,4 +109,22 @@ public class CarController {
             return ResponseEntity.status(500).body(s);
         }
     }
+
+    @GetMapping(value = "reservation/{reservationNumber}")
+    @Operation(summary = "Return Car", description = "Return car")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "car successfully returned", content = @Content(schema = @Schema(implementation = CarDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No car found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<?> returnCar(@PathVariable("reservationNumber") int resNum) {
+        Boolean s = carService.returnCar(resNum);
+        try {
+            if (s) {
+                return ResponseEntity.status(HttpStatus.OK).body(s);
+            }
+            return ResponseEntity.status(404).body(null);
+        } catch (Exception e){
+            return ResponseEntity.status(500).body(s);
+        }
+    }
 }

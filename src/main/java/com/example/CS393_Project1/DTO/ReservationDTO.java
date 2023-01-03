@@ -6,21 +6,12 @@ import java.util.Date;
 
 public class ReservationDTO {
 
-    private Integer id;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getReservationNumber() {
+    public int getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(String reservationNumber) {
+    public void setReservationNumber(int reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 
@@ -96,7 +87,7 @@ public class ReservationDTO {
         this.member = member;
     }
 
-    private String reservationNumber;
+    private int reservationNumber;
     private CarDTO car;
     private Date creationDate;
     private Date pickupDateTime;
