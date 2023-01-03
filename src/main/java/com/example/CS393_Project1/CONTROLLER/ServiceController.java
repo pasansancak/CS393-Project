@@ -2,7 +2,6 @@ package com.example.CS393_Project1.CONTROLLER;
 
 
 import com.example.CS393_Project1.DTO.ServiceDTO;
-import com.example.CS393_Project1.ENTITY.E_Service;
 import com.example.CS393_Project1.SERVICE.ServiceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -60,7 +59,22 @@ public class ServiceController {
             return ResponseEntity.status(500).body(c);
         }
     }
+/*
+    @GetMapping
+    @Operation(summary = "Return the car", description = "Returns car")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "services successfully returned", content = @Content(schema = @Schema(implementation = ServiceDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No service found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<?> returnTheCar(@PathVariable("reservationNumber") String reservationNumber) {
+        boolean s = serviceService.returnTheCar(reservationNumber);
+        try {
 
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(s);
+        }
+    }
+*/
 /*
     @PutMapping("/{id}")
     public serviceDTO updateservice(@PathVariable Long id, @RequestBody serviceDto serviceDto) {

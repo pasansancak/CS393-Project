@@ -1,6 +1,7 @@
 package com.example.CS393_Project1.SERVICE;
 
 import com.example.CS393_Project1.DTO.ReservationDTO;
+import com.example.CS393_Project1.ENTITY.Car;
 import com.example.CS393_Project1.ENTITY.Reservation;
 import com.example.CS393_Project1.ENTITY.Reservation;
 import com.example.CS393_Project1.MAPPER.ReservationMapper;
@@ -40,4 +41,21 @@ public class ReservationService {
         reservationRepo.delete(reservation);
         return true;
     }
+
+    public Boolean cancelReservation(int id) {
+        Reservation reservation = reservationRepo.findById(id);
+        try {
+
+            if (reservation == null) {
+                return false;
+            }
+            reservation.setStatus(Reservation.ReservationStatus.CANCELLED);
+            reservation.getCar().setStatus(Car.CarStatus.AVAILABLE);
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

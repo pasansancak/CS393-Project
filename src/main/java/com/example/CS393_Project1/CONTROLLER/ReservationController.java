@@ -61,5 +61,21 @@ public class ReservationController {
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(reservationService.deleteReservation(id));
     }
+
+    @PutMapping(value="reservation/{id}")
+    public ResponseEntity<Boolean> cancelReservation(@PathVariable int id){
+        try{
+            Boolean response=reservationService.cancelReservation(id);
+            if(response){
+                return ResponseEntity.status(HttpStatus.OK).body(true);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+    }
+
+
 }
 

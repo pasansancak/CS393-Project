@@ -12,7 +12,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "reservation_number")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_number", unique = true, nullable = false, length = 8)
     private String reservationNumber;
 
     @ManyToOne
