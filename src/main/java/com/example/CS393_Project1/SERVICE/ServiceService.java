@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ServiceService {
@@ -21,9 +22,10 @@ public class ServiceService {
         return ServiceMapper.INSTANCE.ServicetoServiceDTO(service);
     }
 
-    public void saveService(ServiceDTO serviceDTO) {
+    public ServiceDTO saveService(ServiceDTO serviceDTO) {
         E_Service service = ServiceMapper.INSTANCE.ServiceDTOtoService(serviceDTO);
         serviceRepo.save(service);
+        return ServiceMapper.INSTANCE.ServicetoServiceDTO(service);
     }
 
     public List<ServiceDTO> getAllServices() {
@@ -33,8 +35,10 @@ public class ServiceService {
         return serviceDTOs;
     }
 
-    public void deleteService(int id) {
+    public boolean deleteService(int id) {
+        //düzelt
         E_Service service = serviceRepo.findById(id);
         serviceRepo.delete(service);
+        return true;
     }
 }
