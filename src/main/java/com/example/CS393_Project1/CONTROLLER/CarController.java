@@ -42,20 +42,20 @@ public class CarController {
 
 
     @GetMapping
-    public List<CarDTO> getAllCars() {
-        return carService.getAllCars();
+    @Operation(summary = "Get all cars", description = "Returns all cars")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "cars successfully returned", content = @Content(schema = @Schema(implementation = CarDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No car found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<List<CarDTO>> getAllCars() {
+        List<CarDTO> c = carService.getAllCars();
+        return ResponseEntity.status(HttpStatus.OK).body(c);
     }
 /*
     @PutMapping("/{id}")
     public CarDTO updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
         return carService.updateCar(id, carDto);
     }
-
-    @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable Long id) {
-        carService.deleteCar(id);
-    }
-
 
 */
 
@@ -66,7 +66,7 @@ public class CarController {
              @ApiResponse(responseCode = "500", description = "Exception Thrown"),
              @ApiResponse(responseCode = "406", description = "Not Acceptable")
              })
-    @RequestMapping(value = "car/{barcode}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "cars/{barcode}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String barcode) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.deleteCar(barcode));
     }
