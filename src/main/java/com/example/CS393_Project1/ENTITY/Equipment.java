@@ -27,6 +27,13 @@ public class Equipment {
     public Equipment() {
     }
 
+    public Equipment(int id, String name, Double price, List<Reservation> reservations) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.reservations = reservations;
+    }
+
     public int getId() {
         return id;
     }

@@ -45,6 +45,20 @@ public class Car {
     public Car() {
     }
 
+    public Car(Integer id, String barcodeNumber, String licensePlateNumber, Integer passengerCapacity, String brand, String model, Integer mileage, String transmissionType, Double dailyPrice, CarType type, CarStatus status) {
+        this.id = id;
+        this.barcodeNumber = barcodeNumber;
+        this.licensePlateNumber = licensePlateNumber;
+        this.passengerCapacity = passengerCapacity;
+        this.brand = brand;
+        this.model = model;
+        this.mileage = mileage;
+        this.transmissionType = transmissionType;
+        this.dailyPrice = dailyPrice;
+        this.type = type;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }

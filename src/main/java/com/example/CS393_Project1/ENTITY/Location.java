@@ -20,6 +20,11 @@ public class Location {
     public Location() {
     }
 
+    public Location(String code, String name, String address) {
+        this.code = code;
+        this.name = name;
+        this.address = address;
+    }
 
     public String getCode() {
         return code;

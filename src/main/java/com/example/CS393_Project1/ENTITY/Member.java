@@ -36,6 +36,17 @@ public class Member {
     public Member() {
     }
 
+    public Member(int id, String firstName, String lastName, String address, String email, String phone, String drivingLicenseNumber, List<Reservation> reservations) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.drivingLicenseNumber = drivingLicenseNumber;
+        this.reservations = reservations;
+    }
+
     public int getId() {
         return id;
     }

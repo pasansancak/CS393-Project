@@ -6,6 +6,18 @@ import java.util.Date;
 
 public class ReservationDTO {
 
+    public ReservationDTO(int reservationNumber, CarDTO car, Date creationDate, Date pickupDateTime, Date dropoffDateTime, LocationDTO pickupLocation, LocationDTO dropoffLocation, Date returnDate, Reservation.ReservationStatus status, MemberDTO member) {
+        this.reservationNumber = reservationNumber;
+        this.car = car;
+        this.creationDate = creationDate;
+        this.pickupDateTime = pickupDateTime;
+        this.dropoffDateTime = dropoffDateTime;
+        this.pickupLocation = pickupLocation;
+        this.dropoffLocation = dropoffLocation;
+        this.returnDate = returnDate;
+        this.status = status;
+        this.member = member;
+    }
 
     public int getReservationNumber() {
         return reservationNumber;

@@ -6,6 +6,12 @@ public class EquipmentDTO {
     private String name;
     private Double price;
 
+    public EquipmentDTO(int id, String name, Double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

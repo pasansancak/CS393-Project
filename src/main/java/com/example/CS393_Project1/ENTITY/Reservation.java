@@ -63,6 +63,24 @@ public class Reservation {
         NONE
     }
 
+    public Reservation(int reservationNumber, Car car, Date creationDate, Date pickupDateTime, Date dropoffDateTime, Location pickupLocation, Location dropoffLocation, Date returnDate, ReservationStatus status, Member member, List<Equipment> equipments, List<E_Service> services) {
+        this.reservationNumber = reservationNumber;
+        this.car = car;
+        this.creationDate = creationDate;
+        this.pickupDateTime = pickupDateTime;
+        this.dropoffDateTime = dropoffDateTime;
+        this.pickupLocation = pickupLocation;
+        this.dropoffLocation = dropoffLocation;
+        this.returnDate = returnDate;
+        this.status = status;
+        this.member = member;
+        this.equipments = equipments;
+        this.services = services;
+    }
+
+    public Reservation() {
+    }
+
     public int getReservationNumber() {
         return reservationNumber;
     }

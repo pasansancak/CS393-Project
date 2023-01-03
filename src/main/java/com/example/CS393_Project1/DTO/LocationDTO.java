@@ -3,6 +3,16 @@ package com.example.CS393_Project1.DTO;
 public class LocationDTO {
 
     private int id;
+    private String code;
+    private String name;
+    private String address;
+
+    public LocationDTO(int id, String code, String name, String address) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -36,8 +46,5 @@ public class LocationDTO {
         this.address = address;
     }
 
-    private String code;
-    private String name;
-    private String address;
 
 }

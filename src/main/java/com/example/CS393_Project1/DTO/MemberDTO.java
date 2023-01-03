@@ -5,6 +5,20 @@ public class MemberDTO {
     private int id;
     private String firstName;
     private String lastName;
+    private String address;
+    private String email;
+    private String phone;
+    private String drivingLicenseNumber;
+
+    public MemberDTO(int id, String firstName, String lastName, String address, String email, String phone, String drivingLicenseNumber) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.drivingLicenseNumber = drivingLicenseNumber;
+    }
 
     public int getId() {
         return id;
@@ -62,9 +76,5 @@ public class MemberDTO {
         this.drivingLicenseNumber = drivingLicenseNumber;
     }
 
-    private String address;
-    private String email;
-    private String phone;
-    private String drivingLicenseNumber;
 
 }

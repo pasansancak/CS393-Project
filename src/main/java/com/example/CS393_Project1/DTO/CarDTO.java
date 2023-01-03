@@ -12,6 +12,20 @@ public class CarDTO {
     private String model;
     private Integer mileage;
 
+    public CarDTO(int id, String barcodeNumber, String licensePlateNumber, Integer passengerCapacity, String brand, String model, Integer mileage, String transmissionType, Double dailyPrice, Car.CarType type, Car.CarStatus status) {
+        this.id = id;
+        this.barcodeNumber = barcodeNumber;
+        this.licensePlateNumber = licensePlateNumber;
+        this.passengerCapacity = passengerCapacity;
+        this.brand = brand;
+        this.model = model;
+        this.mileage = mileage;
+        this.transmissionType = transmissionType;
+        this.dailyPrice = dailyPrice;
+        this.type = type;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
