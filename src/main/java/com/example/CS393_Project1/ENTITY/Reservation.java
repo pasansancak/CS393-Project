@@ -48,8 +48,10 @@ public class Reservation {
     private Member member;
 
     @ManyToMany
+    @Column(name = "equipments")
     private List<Equipment> equipments = new ArrayList<>();
     @ManyToMany
+    @Column(name = "services")
     private List<E_Service> services = new ArrayList<>();
 
     public enum ReservationStatus {

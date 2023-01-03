@@ -2,11 +2,13 @@ package com.example.CS393_Project1.SERVICE;
 
 import com.example.CS393_Project1.DTO.ReservationDTO;
 import com.example.CS393_Project1.ENTITY.Car;
+import com.example.CS393_Project1.ENTITY.E_Service;
 import com.example.CS393_Project1.ENTITY.Equipment;
 import com.example.CS393_Project1.ENTITY.Reservation;
 import com.example.CS393_Project1.MAPPER.ReservationMapper;
 import com.example.CS393_Project1.REPO.EquipmentRepo;
 import com.example.CS393_Project1.REPO.ReservationRepo;
+import com.example.CS393_Project1.REPO.ServiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class ReservationService {
 
     @Autowired
     private EquipmentRepo equipmentRepo;
+
+    @Autowired
+    private ServiceRepo serviceRepo;
 
     public ReservationDTO getReservationById(int id) {
         Reservation reservation = reservationRepo.findById(id);
@@ -80,4 +85,21 @@ public class ReservationService {
         }
     }
 
+    public Boolean addService(int servId, int resId) {
+        try {
+            Reservation reservation = reservationRepo.findById(resId);
+            E_Service service = serviceRepo.findById(servId);
+
+            if (service == null || reservation.getServices().contains(service)) {
+                return false;
+            }
+
+            reservation.getServices().add(service);
+            reservationRepo.save(reservation);
+
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
 }

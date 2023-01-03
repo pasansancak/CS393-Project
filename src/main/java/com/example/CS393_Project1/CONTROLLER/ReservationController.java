@@ -80,7 +80,7 @@ public class ReservationController {
         }
     }
 
-    @PostMapping(value="/{reservationNumber}/{eqId}")
+    @PutMapping(value="reservation/{reservationNumber}/{eqId}")
     @Operation(summary = "Add new equipment", description = "Add new equipment")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Equipment successfully added", content = @Content(schema = @Schema(implementation = ReservationDTO.class))),
@@ -97,6 +97,27 @@ public class ReservationController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
         }
+
+    }
+
+    @PutMapping(value="reservation/{reservationNumber}/{servId}")
+    @Operation(summary = "Add new equipment", description = "Add new equipment")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Equipment successfully added", content = @Content(schema = @Schema(implementation = ReservationDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No reservation found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<Boolean> addService(@PathVariable("reservationNumber")  int resId, @PathVariable("servId")  int servId){
+        try{
+            Boolean response=reservationService.addService(servId, resId);
+            if(response){
+                return ResponseEntity.status(HttpStatus.OK).body(true);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+
 
     }
 
