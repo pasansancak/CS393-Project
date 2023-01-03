@@ -1,10 +1,7 @@
 package com.example.CS393_Project1.SERVICE;
 
-import com.example.CS393_Project1.DTO.CarDTO;
 import com.example.CS393_Project1.DTO.MemberDTO;
-import com.example.CS393_Project1.ENTITY.Car;
 import com.example.CS393_Project1.ENTITY.Member;
-import com.example.CS393_Project1.MAPPER.CarMapper;
 import com.example.CS393_Project1.MAPPER.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,9 +21,10 @@ public class MemberService {
         return MemberMapper.INSTANCE.MembertoMemberDTO(member);
     }
 
-    public void saveMember(MemberDTO MemberDTO) {
+    public MemberDTO saveMember(MemberDTO MemberDTO) {
         Member member = MemberMapper.INSTANCE.MemberDTOtoMember(MemberDTO);
         memberRepo.save(member);
+        return MemberMapper.INSTANCE.MembertoMemberDTO(member);
     }
 
     public List<MemberDTO> getAllMembers() {

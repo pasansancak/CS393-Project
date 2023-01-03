@@ -22,9 +22,10 @@ public class ReservationService {
         return ReservationMapper.INSTANCE.ReservationtoReservationDTO(reservation);
     }
 
-    public void saveReservation(ReservationDTO reservationDTO) {
+    public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
         Reservation reservation = ReservationMapper.INSTANCE.ReservationDTOtoReservation(reservationDTO);
         reservationRepo.save(reservation);
+        return ReservationMapper.INSTANCE.ReservationtoReservationDTO(reservation);
     }
 
     public List<ReservationDTO> getAllReservations() {
@@ -34,8 +35,9 @@ public class ReservationService {
         return reservationDTOs;
     }
 
-    public void deleteReservation(int id) {
+    public boolean deleteReservation(int id) {
         Reservation reservation = reservationRepo.findById(id);
         reservationRepo.delete(reservation);
+        return true;
     }
 }

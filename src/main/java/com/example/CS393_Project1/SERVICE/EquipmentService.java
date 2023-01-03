@@ -22,9 +22,10 @@ public class EquipmentService {
         return EquipmentMapper.INSTANCE.EquipmenttoEquipmentDTO(equipment);
     }
 
-    public void saveEquipment(EquipmentDTO equipmentDTO) {
+    public EquipmentDTO  saveEquipment(EquipmentDTO equipmentDTO) {
         Equipment equipment = EquipmentMapper.INSTANCE.EquipmentDTOtoEquipment(equipmentDTO);
         equipmentRepo.save(equipment);
+        return equipmentDTO;
     }
 
     public List<EquipmentDTO> getAllEquipments() {
@@ -34,8 +35,9 @@ public class EquipmentService {
         return equipmentDTOs;
     }
 
-    public void deleteEquipment(int id) {
+    public boolean deleteEquipment(int id) {
         Equipment equipment = equipmentRepo.findById(id);
         equipmentRepo.delete(equipment);
+        return true;
     }
 }

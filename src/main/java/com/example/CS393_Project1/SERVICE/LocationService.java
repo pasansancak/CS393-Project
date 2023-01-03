@@ -21,9 +21,10 @@ public class LocationService {
         return LocationMapper.INSTANCE.LocationtoLocationDTO(location);
     }
 
-    public void saveLocation(LocationDTO locationDTO) {
+    public LocationDTO saveLocation(LocationDTO locationDTO) {
         Location location = LocationMapper.INSTANCE.LocationDTOtoLocation(locationDTO);
         locationRepo.save(location);
+        return LocationMapper.INSTANCE.LocationtoLocationDTO(location);
     }
 
     public List<LocationDTO> getAllLocations() {
@@ -33,8 +34,9 @@ public class LocationService {
         return locationDTOs;
     }
 
-    public void deleteLocation(int id) {
+    public boolean deleteLocation(int id) {
         Location location = locationRepo.findById(id);
         locationRepo.delete(location);
+        return true;
     }
 }
