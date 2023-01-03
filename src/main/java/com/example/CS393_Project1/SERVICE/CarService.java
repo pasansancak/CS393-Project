@@ -54,4 +54,15 @@ public class CarService {
         }
         return carDTOs;
     }
+
+    public List<CarDTO> getAllRentedCars() {
+        List<Car> cars = carRepo.findAll();
+        List<CarDTO> carDTOs = new ArrayList<>();
+        for (Car car : cars) {
+            if (Objects.equals(car.getStatus().toString(), "LOANED") || Objects.equals(car.getStatus().toString(), "RESERVED")) {
+                carDTOs.add(CarMapper.INSTANCE.carToCarDto(car));
+            }
+        }
+        return carDTOs;
+    }
 }

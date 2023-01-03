@@ -77,6 +77,21 @@ public class CarController {
 
 */
 
+
+    @GetMapping
+    @Operation(summary = "Get all rented cars", description = "Returns all rented cars")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "cars successfully returned", content = @Content(schema = @Schema(implementation = CarDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No car found")})
+    public ResponseEntity<List<CarDTO>> getAllRentedCars() {
+        List<CarDTO> c = carService.getAllRentedCars();
+        if (c != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(c);
+        }
+        return ResponseEntity.status(404).body(null);
+    }
+
+
     @Operation(summary = "Deletes car", description = "deletes cars by barcode")
      @ApiResponses(value = {
              @ApiResponse(responseCode = "200", description = "Car successfully deleted", content = @Content(schema = @Schema(implementation = CarDTO.class))),
