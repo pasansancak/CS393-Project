@@ -6,12 +6,14 @@ import com.example.CS393_Project1.ENTITY.Reservation;
 import com.example.CS393_Project1.MAPPER.CarMapper;
 import com.example.CS393_Project1.REPO.CarRepo;
 import com.example.CS393_Project1.REPO.ReservationRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class CarService {
 
     @Autowired

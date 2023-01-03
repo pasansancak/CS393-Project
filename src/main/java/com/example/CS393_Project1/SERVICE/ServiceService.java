@@ -4,6 +4,7 @@ import com.example.CS393_Project1.DTO.ServiceDTO;
 import com.example.CS393_Project1.ENTITY.E_Service;
 import com.example.CS393_Project1.MAPPER.ServiceMapper;
 import com.example.CS393_Project1.REPO.ServiceRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +18,20 @@ public class ServiceService {
     @Autowired
     private ServiceRepo serviceRepo;
 
+    @Transactional
     public ServiceDTO getServiceById(int id) {
         E_Service service = serviceRepo.findById(id);
         return ServiceMapper.INSTANCE.ServicetoServiceDTO(service);
     }
 
+    @Transactional
     public ServiceDTO saveService(ServiceDTO serviceDTO) {
         E_Service service = ServiceMapper.INSTANCE.ServiceDTOtoService(serviceDTO);
         serviceRepo.save(service);
         return ServiceMapper.INSTANCE.ServicetoServiceDTO(service);
     }
 
+    @Transactional
     public List<ServiceDTO> getAllServices() {
         List<E_Service> services = serviceRepo.findAll();
         List<ServiceDTO> serviceDTOs = new ArrayList<>();
@@ -35,6 +39,7 @@ public class ServiceService {
         return serviceDTOs;
     }
 
+    @Transactional
     public boolean deleteService(int id) {
         //düzelt
         E_Service service = serviceRepo.findById(id);

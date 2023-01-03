@@ -14,6 +14,9 @@ public class LocationDTO {
         this.address = address;
     }
 
+    public LocationDTO() {
+    }
+
     public int getId() {
         return id;
     }

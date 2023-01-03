@@ -12,6 +12,9 @@ public class EquipmentDTO {
         this.price = price;
     }
 
+    public EquipmentDTO() {
+    }
+
     public int getId() {
         return id;
     }

@@ -9,6 +9,7 @@ import com.example.CS393_Project1.MAPPER.ReservationMapper;
 import com.example.CS393_Project1.REPO.EquipmentRepo;
 import com.example.CS393_Project1.REPO.ReservationRepo;
 import com.example.CS393_Project1.REPO.ServiceRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +28,20 @@ public class ReservationService {
     @Autowired
     private ServiceRepo serviceRepo;
 
+    @Transactional
     public ReservationDTO getReservationById(int id) {
         Reservation reservation = reservationRepo.findById(id);
         return ReservationMapper.INSTANCE.ReservationtoReservationDTO(reservation);
     }
 
+    @Transactional
     public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
         Reservation reservation = ReservationMapper.INSTANCE.ReservationDTOtoReservation(reservationDTO);
         reservationRepo.save(reservation);
         return ReservationMapper.INSTANCE.ReservationtoReservationDTO(reservation);
     }
 
+    @Transactional
     public List<ReservationDTO> getAllReservations() {
         List<Reservation> reservations = reservationRepo.findAll();
         List<ReservationDTO> reservationDTOs = new ArrayList<>();
@@ -45,12 +49,14 @@ public class ReservationService {
         return reservationDTOs;
     }
 
+    @Transactional
     public boolean deleteReservation(int id) {
         Reservation reservation = reservationRepo.findById(id);
         reservationRepo.delete(reservation);
         return true;
     }
 
+    @Transactional
     public Boolean cancelReservation(int id) {
         Reservation reservation = reservationRepo.findById(id);
         try {
@@ -67,6 +73,7 @@ public class ReservationService {
         }
     }
 
+    @Transactional
     public Boolean addEquipment(int eqId, int resId) {
         try {
             Reservation reservation = reservationRepo.findById(resId);
@@ -85,6 +92,7 @@ public class ReservationService {
         }
     }
 
+    @Transactional
     public Boolean addService(int servId, int resId) {
         try {
             Reservation reservation = reservationRepo.findById(resId);

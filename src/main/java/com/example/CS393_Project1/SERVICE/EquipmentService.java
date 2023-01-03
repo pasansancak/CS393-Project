@@ -4,6 +4,7 @@ import com.example.CS393_Project1.DTO.EquipmentDTO;
 import com.example.CS393_Project1.ENTITY.Equipment;
 import com.example.CS393_Project1.ENTITY.Equipment;
 import com.example.CS393_Project1.MAPPER.EquipmentMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.CS393_Project1.REPO.EquipmentRepo;
@@ -17,17 +18,20 @@ public class EquipmentService {
     @Autowired
     private EquipmentRepo equipmentRepo;
 
+    @Transactional
     public EquipmentDTO getEquipmentById(int id) {
         Equipment equipment = equipmentRepo.findById(id);
         return EquipmentMapper.INSTANCE.EquipmenttoEquipmentDTO(equipment);
     }
 
+    @Transactional
     public EquipmentDTO  saveEquipment(EquipmentDTO equipmentDTO) {
         Equipment equipment = EquipmentMapper.INSTANCE.EquipmentDTOtoEquipment(equipmentDTO);
         equipmentRepo.save(equipment);
         return equipmentDTO;
     }
 
+    @Transactional
     public List<EquipmentDTO> getAllEquipments() {
         List<Equipment> equipments = equipmentRepo.findAll();
         List<EquipmentDTO> equipmentDTOs = new ArrayList<>();
@@ -35,6 +39,7 @@ public class EquipmentService {
         return equipmentDTOs;
     }
 
+    @Transactional
     public boolean deleteEquipment(int id) {
         Equipment equipment = equipmentRepo.findById(id);
         equipmentRepo.delete(equipment);
