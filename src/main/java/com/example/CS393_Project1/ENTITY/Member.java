@@ -2,13 +2,15 @@ package com.example.CS393_Project1.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "MEMBERS")
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -28,14 +30,17 @@ public class Member {
     @Column(name = "driving_license_number")
     private String drivingLicenseNumber;
 
+    @OneToMany(mappedBy = "member")
+    private List<Reservation> reservations;
+
     public Member() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -87,6 +92,13 @@ public class Member {
         this.drivingLicenseNumber = drivingLicenseNumber;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }
 
 

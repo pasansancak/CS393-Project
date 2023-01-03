@@ -2,15 +2,17 @@ package com.example.CS393_Project1.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "EQUIPMENTS")
 public class Equipment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    // Other fields and methods as previously defined
     @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false)
     private String name;
@@ -18,14 +20,18 @@ public class Equipment {
     @Column(name = "price", nullable = false)
     private Double price;
 
+    @ManyToMany(mappedBy = "equipments")
+    @Column(name = "reservations")
+    private List<Reservation> reservations = new ArrayList<>();
+
     public Equipment() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -45,8 +51,13 @@ public class Equipment {
         this.price = price;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
 
-    // Getters and setters for each field
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
     public enum name {
         SNOW_TYRES,

@@ -2,7 +2,9 @@ package com.example.CS393_Project1.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "RESERVATIONS")
@@ -10,12 +12,8 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_number", unique = true, nullable = false, length = 8)
-    private String reservationNumber;
+    @Column(name = "id", unique = true, nullable = false, length = 8)
+    private int reservationNumber;
 
     @ManyToOne
     @JoinColumn(name = "car_id")
@@ -26,7 +24,6 @@ public class Reservation {
 
     @Column(name = "pickup_date_time")
     private Date pickupDateTime;
-
 
     @Column(name = "dropoff_date_time")
     private Date dropoffDateTime;
@@ -44,28 +41,31 @@ public class Reservation {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private ReservationStatus status;
+    private ReservationStatus status=ReservationStatus.NONE;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Reservation() {
+    @ManyToMany
+    private List<Equipment> equipments = new ArrayList<>();
+    @ManyToMany
+    private List<E_Service> services = new ArrayList<>();
+
+    public enum ReservationStatus {
+        ACTIVE,
+        PENDING,
+        CONFIRMED,
+        COMPLETED,
+        CANCELLED,
+        NONE
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getReservationNumber() {
+    public int getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(String reservationNumber) {
+    public void setReservationNumber(int reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 
@@ -141,12 +141,19 @@ public class Reservation {
         this.member = member;
     }
 
-    public enum ReservationStatus {
-        ACTIVE,
-        PENDING,
-        CONFIRMED,
-        COMPLETED,
-        CANCELLED,
-        NONE
+    public List<Equipment> getEquipments() {
+        return equipments;
+    }
+
+    public void setEquipments(List<Equipment> equipments) {
+        this.equipments = equipments;
+    }
+
+    public List<E_Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<E_Service> services) {
+        this.services = services;
     }
 }

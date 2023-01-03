@@ -1,8 +1,6 @@
 package com.example.CS393_Project1.CONTROLLER;
 
-import com.example.CS393_Project1.DTO.CarDTO;
 import com.example.CS393_Project1.DTO.ReservationDTO;
-import com.example.CS393_Project1.SERVICE.CarService;
 import com.example.CS393_Project1.SERVICE.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,7 +26,7 @@ public class ReservationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "reservation successfully found", content = @Content(schema = @Schema(implementation = ReservationDTO.class))),
             @ApiResponse(responseCode = "404", description = "No reservation found") })
-    public ResponseEntity<ReservationDTO> getReservation(@PathVariable("id") Integer id){
+    public ResponseEntity<ReservationDTO> getReservation(@PathVariable("id") int id){
         ReservationDTO c = reservationService.getReservationById(id);
         return ResponseEntity.status(HttpStatus.OK).body(c);
     }
@@ -58,12 +56,18 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "No reservation found")
     })
     @RequestMapping(value = "reservations/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         return ResponseEntity.status(HttpStatus.OK).body(reservationService.deleteReservation(id));
     }
 
-    @PutMapping(value="reservation/{id}")
-    public ResponseEntity<Boolean> cancelReservation(@PathVariable int id){
+
+    @PostMapping(value="reservation/{id}")
+    @Operation(summary = "Cancel reservation", description = "Cancel reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "reservations successfully cancelled", content = @Content(schema = @Schema(implementation = ReservationDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No reservation found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<Boolean> cancelReservation(@PathVariable("id") int id){
         try{
             Boolean response=reservationService.cancelReservation(id);
             if(response){
@@ -74,6 +78,26 @@ public class ReservationController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
         }
+    }
+
+    @PostMapping(value="/{reservationNumber}/{eqId}")
+    @Operation(summary = "Add new equipment", description = "Add new equipment")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Equipment successfully added", content = @Content(schema = @Schema(implementation = ReservationDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No reservation found"),
+            @ApiResponse(responseCode = "500", description = "Exception Thrown")})
+    public ResponseEntity<Boolean> addEquipment(@PathVariable("reservationNumber")  int resId, @PathVariable("eqId")  int eqId){
+        try{
+            Boolean response=reservationService.addEquipment(eqId, resId);
+            if(response){
+                return ResponseEntity.status(HttpStatus.OK).body(true);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+
     }
 
 

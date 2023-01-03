@@ -1,13 +1,14 @@
 package com.example.CS393_Project1.ENTITY;
 
 import jakarta.persistence.*;
+import java.util.*;
 @Entity
 @Table(name = "SERVICES")
 public class E_Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "name",nullable = false)
@@ -16,14 +17,18 @@ public class E_Service {
     @Column(name = "price",nullable = false)
     private Double price;
 
+    @ManyToMany(mappedBy = "services")
+    @Column(name = "reservations")
+    private List<Reservation> reservations = new ArrayList<>();
+
     public E_Service() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

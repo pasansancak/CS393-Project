@@ -2,15 +2,15 @@ package com.example.CS393_Project1.DTO;
 
 public class EquipmentDTO {
 
-    private Integer id;
+    private int id;
     private String name;
     private Double price;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
